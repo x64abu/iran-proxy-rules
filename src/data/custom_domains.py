@@ -308,7 +308,8 @@ custom_domains = {
         "kishvandnews.ir",
         "kishzoom.net",
         "kouroshgroup.com",
-        "kifpool.me"
+        "kifpool.me",
+        "kifpool.ws",
         "ladylife.org",
         "lamislaser.com",
         "lavaziehlab.com",
