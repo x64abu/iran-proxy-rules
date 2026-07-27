@@ -67,21 +67,6 @@ jobs:
           cd ../output
           mv dlc.dat iran.dat
 
-      - name: Build sing-box .db file
-        run: |
-          git clone https://github.com/bootmortis/sing-geosite
-          
-          cp output/iran.dat sing-geosite/data/iran.dat
-
-          cd sing-geosite
-          go run -v .
-          mv iran-geosite.db ../output/iran-geosite.db
-
-          cd rule-set
-          for file in *; do
-            sha256sum $file > $file.sha256
-          done
-
       - name: Calculate checksum
         run: |
           cd output
