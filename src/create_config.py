@@ -19,6 +19,7 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
         "dns-direct-system = true\n"
         "dns-direct-fallback-proxy = true\n"
         "ipv6 = true\n"
+        "update-url = https://github.com/x64abu/iran-hosted-domains/releases/latest/download/shadowrocket-iran-rules.conf\n"
         "[Rule]\n"
         "IP-CIDR,192.168.0.0/16,DIRECT\n"
         "IP-CIDR,10.0.0.0/8,DIRECT\n"
