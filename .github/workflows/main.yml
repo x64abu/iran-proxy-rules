@@ -43,7 +43,7 @@ jobs:
       - name: Check result files
         run: |
           total=$(wc -l output/domains.txt | awk 'END {print $1}')
-          old=$(curl -sSL --connect-timeout 5 -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/bootmortis/iran-hosted-domains/releases/latest | grep "body" | cut -d\" -f4 | cut -d " " -f1)          
+          old=$(curl -sSL --connect-timeout 5 -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/x64abu/iran-hosted-domains/releases/latest | grep "body" | cut -d\" -f4 | cut -d " " -f1)          
 
           echo "total $total"
           echo "old $old"
@@ -89,15 +89,6 @@ jobs:
             sha256sum $file > $file.sha256
           done
 
-      - name: Upload singbox-geosite result as release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "sing-geosite/rule-set/*.*"
-          repo: sing-geosite
-          body: "${{ env.TOTAL_DOMAINS }} Domains"
-          token: ${{ secrets.SINGBOX_REPO_TOKEN }}
-          tag: ${{ env.TAG_NAME }}
-          name: ${{ env.RELEASE_NAME }}
           
       - name: Upload iran-hosted result as release
         uses: ncipollo/release-action@v1
