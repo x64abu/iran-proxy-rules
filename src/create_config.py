@@ -19,7 +19,7 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
         "dns-direct-system = true\n"
         "dns-direct-fallback-proxy = true\n"
         "ipv6 = true\n"
-        "update-url = https://github.com/x64abu/iran-hosted-domains/releases/latest/download/shadowrocket-iran-rules.conf\n"
+        "update-url = https://github.com/x64abu/iran-proxy-rules/releases/latest/download/shadowrocket-iran-rules.conf\n"
         "[Rule]\n"
         "IP-CIDR,192.168.0.0/16,DIRECT\n"
         "IP-CIDR,10.0.0.0/8,DIRECT\n"
@@ -38,101 +38,3 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     )
     
     utils.save_to_file(consts.shadowrocket_path, config)
-
-
-def qv2ray(bypass_domains: Iterable[str], proxied_domains: Iterable[str], ads_domains: Iterable[str]):
-    schema = {
-        "description": "Iran hosted domains",
-        "domainStrategy": "AsIs",
-        "domains": {
-            "direct": ["domain:ir"] + list(bypass_domains),
-            "proxy": list(proxied_domains),
-            "block": ["geosite:category-ads-all"] + list(ads_domains),
-        },
-        "ips": {"direct": ["geoip:ir"]},
-        "name": "ir_hosted",
-    }
-
-    utils.save_to_file(consts.qv2ray_schema_path, json.dumps(schema))
-
-
-def clash(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
-    text_config_other = yaml_config_other = text_config_ads = yaml_config_ads = (
-        "# Clash\n"
-        "# Wiki: https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers\n"
-    )
-    
-    text_config_other += "".join(f"+.{domain}\n" for domain in bypass_domains)
-    yaml_config_other += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in bypass_domains)
-    text_config_ads += "".join(f"+.{domain}\n" for domain in ads_domains)
-    yaml_config_ads += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in ads_domains)
-
-
-    utils.save_to_file(consts.clash_path_text_other, text_config_other)
-    utils.save_to_file(consts.clash_path_yaml_other, yaml_config_other)
-    utils.save_to_file(consts.clash_path_text_ads, text_config_ads)
-    utils.save_to_file(consts.clash_path_yaml_ads, yaml_config_ads)
-
-
-def surge(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
-    ruleset_config_other = ruleset_config_ads =  (
-        "# Surge\n"
-        "# Manual: https://manual.nssurge.com/rule/ruleset.html\n"
-    )
-    ruleset_config_other += "".join(f"DOMAIN-SUFFIX,{domain}\n" for domain in bypass_domains)    
-    ruleset_config_ads += "".join(f"DOMAIN-SUFFIX,{domain}\n" for domain in ads_domains)        
-
-
-    domainset_config_other = domainset_config_ads = (
-        "# Surge\n"
-        "# Manual: https://manual.nssurge.com/rule/domain-based.html\n"
-    )    
-    domainset_config_other += "".join(f".{domain}\n" for domain in bypass_domains)
-    domainset_config_ads += "".join(f".{domain}\n" for domain in ads_domains)           
-
-
-    utils.save_to_file(consts.surge_ruleset_path_other, ruleset_config_other)
-    utils.save_to_file(consts.surge_domainset_path_other, domainset_config_other) 
-    utils.save_to_file(consts.surge_ruleset_path_ads, ruleset_config_ads)
-    utils.save_to_file(consts.surge_domainset_path_ads, domainset_config_ads)          
-
-
-def hysteria(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
-    acl_client = acl_server =  (
-        "# Hysteria\n"
-        "# Docs: https://hysteria.network/docs/acl\n"
-    )
-
-    acl_client += "".join(f"block domain-suffix {domain}\n" for domain in ads_domains) 
-    acl_client +=  (
-        "direct domain-suffix ir\n"
-        "direct country ir\n"
-    )
-    acl_client += "".join(f"direct domain-suffix {domain}\n" for domain in bypass_domains) 
-    acl_client += "proxy all"
-
-
-    acl_server +=  (
-        "block domain-suffix ir\n"
-        "block country ir\n"
-    )
-    acl_server += "".join(f"block domain-suffix {domain}\n" for domain in ads_domains)
-    acl_server += "".join(f"block domain-suffix {domain}\n" for domain in bypass_domains) 
-    acl_server += "direct all"              
-
-       
-    utils.save_to_file(consts.hysteria_client_path, acl_client)
-    utils.save_to_file(consts.hysteria_server_path, acl_server)
-
-
-def switchy_omega(bypass_domains: Iterable[str]):
-    config = (
-        "[SwitchyOmega Conditions]\n"
-        "; Require: SwitchyOmega >= 2.3.2\n"
-        "; Usage: https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage\n\n"
-        "**.ir\n"
-    )
-    config += "\n".join(f".{domain}" for domain in bypass_domains)
-
-    utils.save_to_file(consts.switchy_omega_path, config)
-
