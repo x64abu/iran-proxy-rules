@@ -86,6 +86,7 @@ custom_domains = {
         "bourseview.com",
         "bordar.live",
         "byhamraz.com",
+        "bozorgraah.com",
         "cafeartini.com",
         "cafebazaar.org",
         "caferahnama.com",
