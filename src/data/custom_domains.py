@@ -8,6 +8,7 @@ custom_domains = {
         "403.online",
         "aanidarman.com",
         "abankapp.ir",
+        "aparatmusic.com",
         "abianpharmed.com",
         "abris.cloud",
         "actoverco.com",
