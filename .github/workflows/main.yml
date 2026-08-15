@@ -61,7 +61,7 @@ jobs:
       - name: Upload iran-hosted result as release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "output/*.*"
+          artifacts: "output/shadowrocket-iran-rules.conf"
           body: "${{ env.TOTAL_DOMAINS }} Domains"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.TAG_NAME }}
