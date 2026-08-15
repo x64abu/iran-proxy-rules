@@ -3,6 +3,8 @@
 This repository will contain routing rules for Shadowrocket.
 This repository is a fork of [bootmortis/iran-hosted-domains](https://github.com/bootmortis/iran-hosted-domains), with several modifications and additional routing rules.
 
+You can always find the latest version in the [release page][link-release]. 
+
 A lot of services and domains are outside of Iran and they are restricted or blocked,
 for accessing this service you need to use VPN or proxies with tunneling option, apart from these problems, when we use
 proxies the domestic services are unavailable because our IP is not in Iran; for bypassing these issues we gathered a list of
@@ -21,12 +23,6 @@ This repository is a compiled list of public information about websites hosted i
 -   `ir`: handpicked `.ir` domains, use as `direct`.
 -   `other`: non `.ir` domains, use as `direct`.
 -   `tld-ir`: all `.ir` domains, use as `direct`.
-
-## Files
-
-You can always find the latest version of these files in the [release page][link-release].  
-You can click on app name to see the usage instructions.  
-Also, for each file there is a `.sha256` file that contains sha256 hash of that file.
 
 
 ## Sources & Acknowledgements
