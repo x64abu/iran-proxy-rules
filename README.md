@@ -1,6 +1,6 @@
 # Iran Proxy Rules
 
-This repository will contain routing rules for the Shadowrocket client and Xray-based clients.
+This repository will contain routing rules for Shadowrocket.
 This repository is a fork of [bootmortis/iran-hosted-domains](https://github.com/bootmortis/iran-hosted-domains), with several modifications and additional routing rules.
 
 A lot of services and domains are outside of Iran and they are restricted or blocked,
