@@ -50,23 +50,6 @@ jobs:
 
           echo "TOTAL_DOMAINS=$total" >> $GITHUB_ENV
 
-      - name: Build .dat file
-        run: |
-          git clone https://github.com/v2fly/domain-list-community
-          rm -rf domain-list-community/data/*
-
-          python3 src/data/custom_domains.py | jq -r '.proxy | join("\n")' > domain-list-community/data/proxy
-          mv output/ir_domains.txt domain-list-community/data/ir
-          mv output/other_domains.txt domain-list-community/data/other
-          cp src/data/tld_ir.txt domain-list-community/data/tld-ir
-          cp src/data/all.txt domain-list-community/data/all
-          mv output/ads.txt domain-list-community/data/ads
-          
-          cd domain-list-community
-          go run ./ --outputdir=../output
-          cd ../output
-          mv dlc.dat iran.dat
-
       - name: Calculate checksum
         run: |
           cd output
