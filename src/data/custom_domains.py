@@ -33,6 +33,7 @@ custom_domains = {
         "ana.press",
         "anesshop.com",
         "anilchoob.com",
+        "animegate.net",
         "aparatsport.com",
         "arianapacking.com",
         "ariasarateb.com",
