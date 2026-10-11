@@ -30,13 +30,13 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     config += "\n".join(f"DOMAIN-SUFFIX,{domain},REJECT" for domain in ads_domains) + "\n"
     config += "DOMAIN-SUFFIX,ir,DIRECT\n"
     config += "\n".join(f"DOMAIN-SUFFIX,{domain},DIRECT" for domain in bypass_domains) + "\n"
-    config += (        
+    config += (
 
         "FINAL,PROXY\n"
         "[Host]\n"
         "localhost = 127.0.0.1\n"
     )
-utils.save_to_file(consts.shadowrocket_path, config)
+    utils.save_to_file(consts.shadowrocket_path, config)
     
     
 def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
@@ -104,4 +104,4 @@ def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     ) + "\n"
 
     config += "  - MATCH,PROXY\n"
-utils.save_to_file(consts.clash_meta_path, config)
+    utils.save_to_file(consts.clash_meta_path, config)
