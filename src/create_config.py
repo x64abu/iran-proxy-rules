@@ -36,6 +36,7 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
         "[Host]\n"
         "localhost = 127.0.0.1\n"
     )
+utils.save_to_file(consts.shadowrocket_path, config)
     
     
 def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
@@ -103,8 +104,4 @@ def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     ) + "\n"
 
     config += "  - MATCH,PROXY\n"
-
-
 utils.save_to_file(consts.clash_meta_path, config)
-
-utils.save_to_file(consts.shadowrocket_path, config)
