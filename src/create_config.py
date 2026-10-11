@@ -37,4 +37,72 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
         "localhost = 127.0.0.1\n"
     )
     
-    utils.save_to_file(consts.shadowrocket_path, config)
+    
+def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
+
+    config = (
+
+        "proxy-groups:\n"
+
+        "  - name: AUTO\n"
+
+        "    type: url-test\n"
+
+        "    include-all: true\n"
+
+        "    url: https://www.gstatic.com/generate_204\n"
+
+        "    interval: 300\n"
+
+        "  - name: PROXY\n"
+
+        "    type: select\n"
+
+        "    include-all: true\n"
+
+        "    proxies:\n"
+
+        "      - AUTO\n"
+
+        "      - DIRECT\n"
+
+        "\n"
+
+        "rules:\n"
+
+        "  - GEOIP,private,DIRECT,no-resolve\n"
+
+        "  - GEOSITE,private,DIRECT\n"
+
+    )
+
+    config += "\n".join(
+
+        f"  - DOMAIN-SUFFIX,{domain},REJECT"
+
+        for domain in ads_domains
+
+    ) + "\n"
+
+    config += (
+
+        "  - GEOSITE,category-ir,DIRECT\n"
+
+        "  - GEOIP,IR,DIRECT\n"
+
+        "  - DOMAIN-SUFFIX,ir,DIRECT\n"
+
+    )
+
+    config += "\n".join(
+
+        f"  - DOMAIN-SUFFIX,{domain},DIRECT"
+
+        for domain in bypass_domains
+
+    ) + "\n"
+
+    config += "  - MATCH,PROXY\n"
+
+
+utils.save_to_file(consts.clash_meta_path, config)    utils.save_to_file(consts.shadowrocket_path, config)
