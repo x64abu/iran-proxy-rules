@@ -105,4 +105,6 @@ def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     config += "  - MATCH,PROXY\n"
 
 
-utils.save_to_file(consts.clash_meta_path, config)    utils.save_to_file(consts.shadowrocket_path, config)
+utils.save_to_file(consts.clash_meta_path, config)
+
+        utils.save_to_file(consts.shadowrocket_path, config)
