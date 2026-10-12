@@ -37,21 +37,3 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
         "localhost = 127.0.0.1\n"
     )
     utils.save_to_file(consts.shadowrocket_path, config)
-    
-    
-def clash(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
-    text_config_other = yaml_config_other = text_config_ads = yaml_config_ads = (
-        "# Clash\n"
-        "# Wiki: https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers\n"
-    )
-    
-    text_config_other += "".join(f"+.{domain}\n" for domain in bypass_domains)
-    yaml_config_other += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in bypass_domains)
-    text_config_ads += "".join(f"+.{domain}\n" for domain in ads_domains)
-    yaml_config_ads += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in ads_domains)
-
-
-    utils.save_to_file(consts.clash_path_text_other, text_config_other)
-    utils.save_to_file(consts.clash_path_yaml_other, yaml_config_other)
-    utils.save_to_file(consts.clash_path_text_ads, text_config_ads)
-    utils.save_to_file(consts.clash_path_yaml_ads, yaml_config_ads)
