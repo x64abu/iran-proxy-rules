@@ -39,69 +39,19 @@ def shadowrocket(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
     utils.save_to_file(consts.shadowrocket_path, config)
     
     
-def clash_meta(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
-
-    config = (
-
-        "proxy-groups:\n"
-
-        "  - name: AUTO\n"
-
-        "    type: url-test\n"
-
-        "    include-all: true\n"
-
-        "    url: https://www.gstatic.com/generate_204\n"
-
-        "    interval: 300\n"
-
-        "  - name: PROXY\n"
-
-        "    type: select\n"
-
-        "    include-all: true\n"
-
-        "    proxies:\n"
-
-        "      - AUTO\n"
-
-        "      - DIRECT\n"
-
-        "\n"
-
-        "rules:\n"
-
-        "  - GEOIP,private,DIRECT,no-resolve\n"
-
-        "  - GEOSITE,private,DIRECT\n"
-
+def clash(bypass_domains: Iterable[str], ads_domains: Iterable[str]):
+    text_config_other = yaml_config_other = text_config_ads = yaml_config_ads = (
+        "# Clash\n"
+        "# Wiki: https://dreamacro.github.io/clash/premium/rule-providers.html#rule-providers\n"
     )
+    
+    text_config_other += "".join(f"+.{domain}\n" for domain in bypass_domains)
+    yaml_config_other += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in bypass_domains)
+    text_config_ads += "".join(f"+.{domain}\n" for domain in ads_domains)
+    yaml_config_ads += "payload:\n" + "".join(f"  - '+.{domain}'\n" for domain in ads_domains)
 
-    config += "\n".join(
 
-        f"  - DOMAIN-SUFFIX,{domain},REJECT"
-
-        for domain in ads_domains
-
-    ) + "\n"
-
-    config += (
-
-        "  - GEOSITE,category-ir,DIRECT\n"
-
-        "  - GEOIP,IR,DIRECT\n"
-
-        "  - DOMAIN-SUFFIX,ir,DIRECT\n"
-
-    )
-
-    config += "\n".join(
-
-        f"  - DOMAIN-SUFFIX,{domain},DIRECT"
-
-        for domain in bypass_domains
-
-    ) + "\n"
-
-    config += "  - MATCH,PROXY\n"
-    utils.save_to_file(consts.clash_meta_path, config)
+    utils.save_to_file(consts.clash_path_text_other, text_config_other)
+    utils.save_to_file(consts.clash_path_yaml_other, yaml_config_other)
+    utils.save_to_file(consts.clash_path_text_ads, text_config_ads)
+    utils.save_to_file(consts.clash_path_yaml_ads, yaml_config_ads)
