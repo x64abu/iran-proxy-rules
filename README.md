@@ -1,6 +1,6 @@
 # Iran Proxy Rules
 
-This repository will contain routing rules for Shadowrocket.
+This repository will contain routing rules for Shadowrocket, Stash and Clash.
 This repository is a fork of [bootmortis/iran-hosted-domains](https://github.com/bootmortis/iran-hosted-domains), with several modifications and additional routing rules.
 
 You can always find the latest version in the [release page][link-release]. 
@@ -13,6 +13,32 @@ Iranian domains and services to help our people bypass this situation.
 ## Disclaimer
 
 This repository is a compiled list of public information about websites hosted in Iran. It is intended for informational purposes only and is not intended to provide guidance on how to connect to or create or manage a virtual private network (VPN). The content in this repository is provided as-is and we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability of the information contained in this repository. Any reliance you place on such information is strictly at your own risk. We will not be liable for any errors or omissions in the information or for any losses, damages, or other liabilities that may arise from its use. Please use caution and consult with a qualified professional before using any information from this repository.
+
+## Shadowrocket
+Just copy shadowrocket-iran-rules.conf link from [release page][link-release] and import it Config section with + at up-right of screen
+
+## Stash / Clash Rule Config
+```yaml
+rules:
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,private,DIRECT
+  - RULE-SET,iran_ads,REJECT
+  - DOMAIN-SUFFIX,ir,DIRECT
+  - RULE-SET,iran_other,DIRECT
+  - GEOIP,IR,DIRECT
+  - MATCH,Proxy_Group_Name
+rule-providers:
+  iran_other:
+    type: http
+    format: yaml
+    behavior: domain
+    url: https://github.com/x64abu/iran-proxy-rules/releases/latest/download/clash_rules_other.yaml
+  iran_ads:
+    type: http
+    format: yaml
+    behavior: domain
+    url: https://github.com/x64abu/iran-proxy-rules/releases/latest/download/clash_rules_ads.yaml
+```
 
 
 ## Categories

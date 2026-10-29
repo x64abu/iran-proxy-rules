@@ -1,8 +1,5 @@
 custom_domains = {
-    "proxy": [
-        "animelist.ir",
-        "gamepass.ir",
-    ],
+    "proxy": [],
     "direct": [
         "2agoo.com",
         "403.online",
@@ -60,6 +57,7 @@ custom_domains = {
         "azaran.com",
         "azbusines.com",
         "azkiloan.com",
+        "animelist.ir",
         "ba-charter.com",
         "babakanclinic.com",
         "baharmri.com",
@@ -235,6 +233,7 @@ custom_domains = {
         "goldenani.com",
         "golnazbeautysalon.com",
         "guardsteel.com",
+        "gamepass.ir",
         "haamee.org",
         "hadaf.agency",
         "hammihanonline.ir",
